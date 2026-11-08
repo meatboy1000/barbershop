@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>Барбершоп «Стрижка у Волги» · Волжский</title>
 <meta name="description" content="Мужские стрижки, фейды и бороды в Волжском. Онлайн-запись на сайте и в Telegram. Демо-сайт.">
 <meta property="og:title" content="Барбершоп «Стрижка у Волги»">
@@ -132,7 +133,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 @media (max-width: 760px) {
   .mobile-cta { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; padding: 10px max(14px, env(safe-area-inset-left, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(14,15,18,.92); backdrop-filter: blur(8px); }
   .mobile-cta .btn { width: 100%; justify-content: center; }
-  footer { padding-bottom: 96px; }
+  footer { padding-bottom: 24px; }
+  .made-by { padding-bottom: 96px !important; }
 }
 </style>
 </head>
@@ -243,7 +245,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <div class="mobile-cta"><a class="btn solid" href="#book">Записаться онлайн</a></div>
 
-<script src="assets/bot-demo.js?v=3"></script>
+<script src="assets/bot-demo.js?v=4"></script>
+<a class="made-by" href="https://meatboy1000.github.io/" style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:#121212;color:#f7f6f2;text-decoration:none;font:500 15px/1.4 system-ui,-apple-system,'Segoe UI',Arial,sans-serif;text-transform:none;letter-spacing:normal;padding:16px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px));position:relative;z-index:30"><svg viewBox="0 0 34 30" width="22" height="20" aria-hidden="true" style="flex:none"><path d="M7 2h20a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H15l-7 6v-6H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z" fill="#e1392c"/><circle cx="11" cy="12.5" r="2.3" fill="#fff"/><circle cx="17" cy="12.5" r="2.3" fill="#fff"/><circle cx="23" cy="12.5" r="2.3" fill="#fff"/></svg><span>Это демо от «сайт и бот». Хотите такой же сайт и бота для своего бизнеса?</span><b style="color:#ff6b5e;font-weight:700">Узнать цену →</b></a>
 <script>
 const services = [
   { name: "Мужская стрижка", note: "машинка + ножницы, мытьё, укладка", min: 45, price: 900 },
@@ -256,7 +259,8 @@ const services = [
 document.getElementById("priceList").innerHTML = services.map(s =>
   `<div class="price"><div class="name">${s.name}</div><div class="rub">${s.price.toLocaleString("ru-RU")} ₽</div><div class="note">${s.note}</div><div class="min">${s.min} мин</div></div>`).join("");
 BotDemo.mount(document.getElementById("bot"), {
-  name: "Стрижка у Волги", avatar: "✂", color: "#d23a2f",
+  name: "Стрижка у Волги", avatar: "✂", color: "#d23a2f", theme: "paper",
+  vars: { acc: "#d23a2f", "out-ink": "#ffffff", paper: "#f2efe9", bg: "#e7e2d8", ink: "#141414", r: "12px" },
   welcome: "Здравствуйте! Это бот барбершопа «Стрижка у Волги» 💈\nЗапишитесь за минуту: выберите услугу, мастера и удобное время.",
   contacts: "<b>Стрижка у Волги</b>\nг. Волжский, ул. Примерная, 1\nЕжедневно 10:00–21:00\n+7 (8443) 00-00-00",
   services: services.slice(0, 5), staff: ["Артём", "Илья", "Роман"]
