@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Барбершоп в Волжском: прайс, мастера и онлайн-запись. Демо-сайт.">
+<title>Барбершоп «Стрижка у Волги»</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a barber pole stripe runs down the left of the hero; below it, a price list set like a printed menu, then masters and a working booking card. */
+:root {
+  --bg: #f3f4f6;
+  --paper: #ffffff;
+  --ink: #16213a;
+  --muted: #5a6478;
+  --line: #d9dde6;
+  --red: #c8322b;
+  --blue: #1f4fa3;
+  --ok: #1d7a4b;
+  --display: "Rubik Mono One", "Arial Black", Impact, sans-serif;
+  --body: "Manrope", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1525; --paper: #172036; --ink: #eef1f7; --muted: #a3acc0; --line: #2a3550;
+    --red: #e5544c; --blue: #6f9cf0; --ok: #4cc58a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1525; --paper: #172036; --ink: #eef1f7; --muted: #a3acc0; --line: #2a3550;
+  --red: #e5544c; --blue: #6f9cf0; --ok: #4cc58a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2 { font-family: var(--display); font-weight: 400; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(1.9rem, 5.5vw, 3.4rem); }
+h2 { font-size: clamp(1.25rem, 3vw, 1.7rem); }
+.label { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* top bar */
+.top { padding-block: 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo { font-family: var(--display); font-size: 1rem; }
+.top .phone { font-family: var(--mono); font-size: .95rem; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 22px 1fr; gap: 24px; padding-block: 28px 44px; }
+.pole { border-radius: 11px; background: repeating-linear-gradient(135deg, var(--red) 0 14px, var(--paper) 14px 28px, var(--blue) 28px 42px, var(--paper) 42px 56px); background-size: 100% 80px; animation: spin 3s linear infinite; min-height: 220px; }
+@keyframes spin { to { background-position: 0 80px; } }
+@media (prefers-reduced-motion: reduce) { .pole { animation: none; } }
+.hero-text { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.hero p { margin: 0; max-width: 56ch; color: var(--muted); font-size: 1.08rem; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; border: 2px solid var(--ink); background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px; font: 800 1rem var(--body); cursor: pointer; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:hover { transform: translateY(-1px); }
+.facts { display: flex; gap: 28px; flex-wrap: wrap; font-size: .95rem; }
+.facts b { display: block; font-family: var(--mono); font-size: 1.2rem; }
+
+section { padding-block: 40px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 6px; margin-bottom: 22px; }
+
+/* price list */
+.prices { display: grid; gap: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.row { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: baseline; padding: 14px 18px; border-bottom: 1px dashed var(--line); }
+.row:last-child { border-bottom: 0; }
+.row .name { font-weight: 800; min-width: 0; }
+.row .name small { display: block; font-weight: 400; color: var(--muted); }
+.row .min, .row .rub { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.row .min { color: var(--muted); font-size: .9rem; }
+.row .rub { font-size: 1.05rem; }
+
+/* masters */
+.masters { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.master { display: grid; gap: 6px; }
+.ava { aspect-ratio: 1; max-width: 100%; border-radius: 14px; display: grid; place-items: center; font-family: var(--display); font-size: 2.6rem; color: var(--paper); }
+.master h3 { margin: 6px 0 0; font-size: 1.1rem; }
+.master p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* booking */
+.book { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+@media (max-width: 760px) { .book { grid-template-columns: 1fr; } .hero { grid-template-columns: 12px 1fr; gap: 16px; } }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 800; font-size: .9rem; }
+select, input { font: inherit; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
+.days, .slots { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 8px 12px; font: 600 .9rem var(--body); cursor: pointer; }
+.chip small { display: block; font-weight: 400; color: var(--muted); font-size: .75rem; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip[aria-pressed="true"] small { color: var(--bg); }
+.chip:disabled { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+.slots .chip { font-family: var(--mono); }
+.summary { font-size: .95rem; color: var(--muted); }
+.summary b { color: var(--ink); }
+.err { color: var(--red); font-weight: 600; margin: 0; }
+.done { border-color: var(--ok); }
+.done h3 { color: var(--ok); margin: 0; }
+.info { display: grid; gap: 14px; align-content: start; }
+.info p { margin: 0; }
+.tg { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+
+footer { padding-block: 28px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.demo { font-family: var(--mono); border: 1px dashed var(--muted); border-radius: 6px; padding: 2px 8px; }
+</style>
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Стрижка у Волги</div>
+    <div class="phone">+7 (8443) 00-00-00</div>
+  </header>
+
+  <div class="hero">
+    <div class="pole" aria-hidden="true"></div>
+    <div class="hero-text">
+      <div class="label">Барбершоп · Волжский</div>
+      <h1>Мужская стрижка за 45 минут. Без очереди.</h1>
+      <p>Выберите мастера и свободное время прямо на сайте или в Telegram-боте. Мы пришлём напоминание за 2 часа до визита.</p>
+      <div class="btns">
+        <a class="btn" href="#book">Записаться</a>
+        <a class="btn ghost" href="#prices">Цены</a>
+      </div>
+      <div class="facts">
+        <div><b>10:00–21:00</b>каждый день</div>
+        <div><b>3 мастера</b>в смене</div>
+        <div><b>от 900 ₽</b>стрижка</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="prices">
+    <div class="sec-head"><div class="label">Прайс</div><h2>Услуги и цены</h2></div>
+    <div class="prices" id="priceList"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><div class="label">Команда</div><h2>Мастера</h2></div>
+    <div class="masters" id="masterList"></div>
+  </section>
+
+  <section id="book">
+    <div class="sec-head"><div class="label">Онлайн-запись</div><h2>Записаться на стрижку</h2></div>
+    <div class="book">
+      <form class="card" id="bookForm" novalidate>
+        <div class="field">
+          <label for="service">Услуга</label>
+          <select id="service"></select>
+        </div>
+        <div class="field">
+          <label for="master">Мастер</label>
+          <select id="master"></select>
+        </div>
+        <div class="field">
+          <label>День</label>
+          <div class="days" id="days"></div>
+        </div>
+        <div class="field">
+          <label>Время</label>
+          <div class="slots" id="slots"></div>
+        </div>
+        <div class="field">
+          <label for="name">Имя</label>
+          <input id="name" autocomplete="given-name" placeholder="Например, Алексей">
+        </div>
+        <div class="field">
+          <label for="phone">Телефон</label>
+          <input id="phone" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00">
+        </div>
+        <div class="summary" id="summary"></div>
+        <p class="err" id="err" hidden></p>
+        <button class="btn" type="submit">Отправить заявку</button>
+      </form>
+
+      <div class="info">
+        <div class="card done" id="done" hidden>
+          <h3>Заявка принята</h3>
+          <p id="doneText"></p>
+          <button class="btn ghost" type="button" id="again">Записаться ещё</button>
+        </div>
+        <div class="tg">
+          <div class="label">Telegram</div>
+          <p>Удобнее в мессенджере? Наш бот покажет свободное время, запишет и напомнит о визите.</p>
+        </div>
+        <div>
+          <div class="label">Адрес</div>
+          <p>г. Волжский, ул. Примерная, 1<br>Парковка у входа</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© Стрижка у Волги</span>
+    <span class="demo">Демо-сайт для портфолио · вымышленный бизнес</span>
+  </footer>
+</div>
+
+<script>
+const services = [
+  { id: "cut", name: "Мужская стрижка", note: "машинка + ножницы, мытьё головы", min: 45, rub: 900 },
+  { id: "fade", name: "Фейд", note: "плавный переход от 0 мм", min: 60, rub: 1200 },
+  { id: "beard", name: "Моделирование бороды", note: "форма, контур, горячее полотенце", min: 30, rub: 700 },
+  { id: "combo", name: "Стрижка + борода", note: "комплекс", min: 75, rub: 1500 },
+  { id: "kid", name: "Детская стрижка", note: "до 12 лет", min: 30, rub: 650 },
+  { id: "buzz", name: "Под машинку", note: "одна насадка", min: 20, rub: 500 }
+];
+const masters = [
+  { id: "any", name: "Любой свободный" },
+  { id: "artem", name: "Артём", role: "Старший мастер", about: "Фейды и короткие стрижки. 7 лет за креслом.", color: "var(--blue)" },
+  { id: "ilya", name: "Илья", role: "Мастер", about: "Бороды и классика. Работает с опасной бритвой.", color: "var(--red)" },
+  { id: "roma", name: "Роман", role: "Мастер", about: "Детские и молодёжные стрижки. Терпелив к непоседам.", color: "var(--ink)" }
+];
+const $ = (id) => document.getElementById(id);
+const rub = (n) => n.toLocaleString("ru-RU") + " ₽";
+
+$("priceList").innerHTML = services.map(s =>
+  `<div class="row"><div class="name">${s.name}<small>${s.note}</small></div><div class="min">${s.min} мин</div><div class="rub">${rub(s.rub)}</div></div>`).join("");
+$("masterList").innerHTML = masters.filter(m => m.id !== "any").map(m =>
+  `<div class="master"><div class="ava" style="background:${m.color}">${m.name[0]}</div><h3>${m.name}</h3><div class="label">${m.role}</div><p>${m.about}</p></div>`).join("");
+$("service").innerHTML = services.map(s => `<option value="${s.id}">${s.name} — ${rub(s.rub)}</option>`).join("");
+$("master").innerHTML = masters.map(m => `<option value="${m.id}">${m.name}</option>`).join("");
+
+// Build next 7 days and pseudo-random busy slots so the demo looks lived-in.
+const dayNames = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(today); d.setDate(d.getDate() + i); return d; });
+const times = []; for (let h = 10; h < 21; h++) { times.push(`${h}:00`); times.push(`${h}:30`); }
+function busy(dayIdx, t, master) { const k = (dayIdx * 31 + t.length * 7 + parseInt(t) * 13 + master.length * 5 + (t.endsWith("30") ? 3 : 0)) % 5; return k === 0 || k === 3; }
+
+const state = { day: 0, time: null };
+function renderDays() {
+  $("days").innerHTML = days.map((d, i) => {
+    const label = i === 0 ? "Сегодня" : i === 1 ? "Завтра" : dayNames[d.getDay()];
+    return `<button type="button" class="chip" data-day="${i}" aria-pressed="${i === state.day}">${label}<small>${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")}</small></button>`;
+  }).join("");
+}
+function renderSlots() {
+  const now = new Date(); const m = $("master").value;
+  $("slots").innerHTML = times.map(t => {
+    const [h, mm] = t.split(":").map(Number);
+    const past = state.day === 0 && (h * 60 + mm) <= now.getHours() * 60 + now.getMinutes();
+    const taken = past || busy(state.day, t, m);
+    if (taken && state.time === t) state.time = null;
+    return `<button type="button" class="chip" data-time="${t}" ${taken ? "disabled" : ""} aria-pressed="${state.time === t}">${t}</button>`;
+  }).join("");
+  renderSummary();
+}
+function renderSummary() {
+  const s = services.find(x => x.id === $("service").value);
+  const d = days[state.day];
+  $("summary").innerHTML = `Итого: <b>${s.name}</b>, ${s.min} мин, <b>${rub(s.rub)}</b>` +
+    (state.time ? ` · ${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")} в <b>${state.time}</b>` : " · выберите время");
+}
+$("days").addEventListener("click", e => { const b = e.target.closest("[data-day]"); if (!b) return; state.day = +b.dataset.day; state.time = null; renderDays(); renderSlots(); });
+$("slots").addEventListener("click", e => { const b = e.target.closest("[data-time]"); if (!b || b.disabled) return; state.time = b.dataset.time; renderSlots(); });
+$("service").addEventListener("change", renderSummary);
+$("master").addEventListener("change", renderSlots);
+
+$("bookForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("name").value.trim(); const phone = $("phone").value.replace(/\D/g, "");
+  let msg = "";
+  if (!state.time) msg = "Выберите время визита.";
+  else if (!name) msg = "Напишите, как к вам обращаться.";
+  else if (phone.length < 10) msg = "Проверьте телефон: нужно 10–11 цифр.";
+  $("err").hidden = !msg; $("err").textContent = msg;
+  if (msg) return;
+  const s = services.find(x => x.id === $("service").value);
+  const m = masters.find(x => x.id === $("master").value);
+  const d = days[state.day];
+  $("doneText").textContent = `${name}, ждём вас ${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")} в ${state.time}. ${s.name}, мастер: ${m.name.toLowerCase() === "любой свободный" ? "любой свободный" : m.name}. Администратор перезвонит для подтверждения. (Это демо, заявка никуда не отправляется.)`;
+  $("done").hidden = false; $("bookForm").hidden = true;
+});
+$("again").addEventListener("click", () => { $("done").hidden = true; $("bookForm").hidden = false; state.time = null; renderSlots(); });
+
+renderDays(); renderSlots();
+</script>
+</body>
+</html>
